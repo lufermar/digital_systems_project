@@ -9,7 +9,7 @@
     Yves Acremann, 30.12.2020
 */
     
-module AdcReader(    
+module ADC(    
     input                   clk_i,      // clock
     input                   reset_i,    // reset
     output signed [15:0]    data_o,     // received data

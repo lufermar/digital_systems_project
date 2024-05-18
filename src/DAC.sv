@@ -3,7 +3,7 @@
 /**
  Module to control the DAC on the ADC/DAC board.
 */    
-module DacWriter
+module DAC
     (
     input               clk_i,            // clock
     input               reset_i,          // sync. reset
