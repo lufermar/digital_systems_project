@@ -9,15 +9,24 @@ module quartus_proj(
     output [7:0]    HEX0,           // 7-segment dieplay
     output [7:0]    HEX1,           // 7-segment dieplay
     output [7:0]    HEX2,           // 7-segment dieplay
-    output [7:0]    HEX3,           // 7-segment dieplay
-    output [7:0]    HEX4            // 7-segment dieplay
+    output [7:0]    HEX3
 );
     
 	 // Connect the LEDs 0 and 1 to the switches 0 and 1
-    assign LEDR[1:0] = SW[1:0];
-	 
-	 // connect the LED 2 to the AND of the two switches
-	 // assign LEDR[2] = SW[1] && SW[0];
-	 assign LEDR[2] = SW[1] ^ SW[0];
+    SevenSegment0 digit0(SW[2:0], HEX0[6:0]);
+    assign HEX0[7] = 1; // turn dot off
+    SevenSegment1 digit1(SW[2:0], HEX1[6:0]);
+    assign HEX1[7] = 1; // turn dot off
+    SevenSegment2 digit2(SW[2:0], HEX2[6:0]);
+    assign HEX2[7] = 1; // turn dot off
+    SevenSegment3 digit3(SW[2:0], HEX3[6:0]);
+    assign HEX2[7] = 1; // turn dot off
+	 assign HEX3[7] = 1; // turn dot off
+
+    FilterStateMachine #(.TIMER_W(TIMER_W))timerStateMachine(
+    .clk_i(clk),
+    .state_i(reset),
+    .state_o(state_o)
+  );
 
 endmodule
